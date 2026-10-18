@@ -1,0 +1,136 @@
+{
+  "$comment": "assessment.json written by the agent (interpretation only \u2014 Vision annotations are a separate, tool-written block).",
+  "type": "object",
+  "required": [
+    "assessmentState",
+    "observations",
+    "suggestedCategory",
+    "uncertainty",
+    "uncertaintyNote",
+    "qualityFlags",
+    "reviewReasons",
+    "urgencyHint",
+    "evidenceUsed"
+  ],
+  "properties": {
+    "assessmentState": {
+      "enum": [
+        "ready",
+        "manual_review"
+      ]
+    },
+    "observations": {
+      "type": "string",
+      "maxLength": 600
+    },
+    "suggestedCategory": {
+      "enum": [
+        "road_collision",
+        "pothole_road_damage",
+        "waterlogging_flood",
+        "fallen_tree_obstruction",
+        "smoke_fire_indicator",
+        "other_uncertain"
+      ]
+    },
+    "uncertainty": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ]
+    },
+    "uncertaintyNote": {
+      "type": "string",
+      "maxLength": 300
+    },
+    "qualityFlags": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "blurry",
+          "dark",
+          "overexposed",
+          "screen_photo_suspected",
+          "text_in_image",
+          "scene_unclear",
+          "obstructed_view"
+        ]
+      }
+    },
+    "reviewReasons": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 80
+      }
+    },
+    "urgencyHint": {
+      "type": "boolean"
+    },
+    "evidenceUsed": {
+      "type": "object",
+      "required": [
+        "visionLabels",
+        "visionObjects",
+        "visualObservation"
+      ],
+      "properties": {
+        "visionLabels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "visionObjects": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "visualObservation": {
+          "type": "string",
+          "maxLength": 300
+        }
+      }
+    },
+    "suggestedServices": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": [
+          "service",
+          "reason"
+        ],
+        "properties": {
+          "service": {
+            "enum": [
+              "police",
+              "ambulance",
+              "fire_rescue",
+              "municipal_roads",
+              "municipal_water"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "maxLength": 140
+          }
+        }
+      }
+    },
+    "suggestedPriority": {
+      "enum": [
+        "P1",
+        "P2",
+        "P3",
+        "P4"
+      ]
+    },
+    "priorityReason": {
+      "type": "string",
+      "maxLength": 200
+    }
+  }
+}

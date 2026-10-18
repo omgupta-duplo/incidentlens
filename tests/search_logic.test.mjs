@@ -1,0 +1,18 @@
+import assert from 'node:assert/strict';
+import { matchesRecord, matchesEvidence, matchesPulse } from '../frontend/src/app/control/record-search.ts';
+let count=0; const test=(name,f)=>{f(); count++; console.log('ok',name);};
+test('empty and whitespace clears',()=>{assert.ok(matchesRecord('  ',[]));});
+test('case whitespace underscore normalization across fields',()=>assert.ok(matchesRecord(' ROAD    P3 ',['road_collision','P3'])));
+test('literal punctuation not regex',()=>{assert.equal(matchesRecord('.*',['road']),false); assert.ok(matchesRecord('[A]',['[A]']));});
+test('every term must match',()=>assert.equal(matchesRecord('road missing',['road']),false));
+test('missing and nested fields are safe',()=>assert.equal(matchesRecord('secret',[null,{},['secret']]),false));
+const report={id:'r1',name:'R-104',spec:{note:'Water near North bridge',reporterEmail:'secret@example.com'},result:{assessment:{observations:'Standing water',suggestedCategory:'waterlogging_flood'}}};
+test('evidence reference and observed details',()=>{assert.ok(matchesEvidence('r-104 water',report,'Flood','Flood'));assert.ok(matchesEvidence('north bridge',report,'Flood','Flood'));});
+test('evidence does not search owner email',()=>assert.equal(matchesEvidence('secret@example.com',report,'Flood','Flood'),false));
+test('empty assessment safe',()=>assert.ok(matchesEvidence('',{},'','')));
+const incident={id:'i1',name:'INC-1',category:'road_collision',jurisdiction:'North Ward',summary:'Bridge approach',priority:'P1'};
+test('pulse combined text and area',()=>assert.ok(matchesPulse('bridge P1',' north ward ',incident,'Road collision')));
+test('area matches recorded jurisdiction only',()=>{assert.equal(matchesPulse('','bridge',incident,''),false);assert.equal(matchesPulse('','north',{...incident,jurisdiction:null},''),false);});
+test('search and area intersect',()=>assert.equal(matchesPulse('fire','north',incident,''),false));
+test('clear restores all including unknown areas',()=>assert.ok(matchesPulse('','',{jurisdiction:null},'')));
+console.log(`${count} search checks passed`);

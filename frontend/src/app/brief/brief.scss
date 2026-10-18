@@ -1,0 +1,160 @@
+@use '../shared/il' as *;
+@include il-page;
+.il-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; border: 0; padding: 0; }
+@media (max-width: 760px) { .il-grid3 { grid-template-columns: 1fr; } }
+.il-lead { font-size: 1.05rem; line-height: 1.5; margin: 0 0 14px; }
+.il-claims { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.il-claims li { border: 1px solid $il-line; border-left: 5px solid $il-line; border-radius: 10px; padding: 10px 12px; background: #fff; }
+.il-claims li[data-v='supported'] { border-left-color: $il-ok; }
+.il-claims li[data-v='contradicted'] { border-left-color: $il-danger; }
+.il-claims li[data-v='outdated'] { border-left-color: $il-warn; }
+.il-claims p { margin: 4px 0; }
+.il-verdict { display: inline-block; border-radius: 6px; padding: 1px 8px; font-size: .78rem; font-weight: 800; margin-right: 6px; border: 1px solid $il-line; background: $il-bg; }
+.il-verdict[data-v='supported'], .il-verdict[data-v='feas-ok'] { background: $il-ok-soft; color: $il-ok; }
+.il-verdict[data-v='contradicted'], .il-verdict[data-v='feas-avoid'] { background: $il-danger-soft; color: $il-danger; }
+.il-verdict[data-v='outdated'], .il-verdict[data-v='feas-caution'] { background: $il-warn-soft; color: $il-warn; }
+.il-tl { list-style: none; margin: 0; padding: 0 0 0 14px; border-left: 3px solid $il-teal-soft; }
+.il-tl li { position: relative; margin: 0 0 12px; padding-left: 8px; }
+.il-tl li::before { content: ''; position: absolute; left: -22px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: $il-teal; }
+.il-tl-at { font-weight: 700; font-size: .85rem; color: $il-teal; }
+.il-tl p { margin: 2px 0; }
+.il-tl a, .il-claims a { color: $il-teal; margin-right: 8px; }
+
+// Approved brief: calm, narrow reading column with three focused sections.
+.brief-page.il-page { box-sizing: border-box; width: 100%; max-width: 430px; margin: 20px auto; padding: 24px; border: 1px solid #dce5df; border-radius: 28px; background: #f8faf6; color: #173c38; overflow-wrap: anywhere; }
+.brief-page h1 { font-size: 31px; font-weight: 650; line-height: 1.14; letter-spacing: -1px; }
+.brief-page h2 { font-size: 19px; line-height: 1.3; }
+.brief-page .il-head { margin-bottom: 18px; }
+.brief-page .il-card { border: 1px solid #dce5df; border-radius: 19px; padding: 19px; margin: 16px 0; background: #fff; }
+.brief-page .brief-cover { background: #e6edde; color: #173c38; border: 0; border-radius: 20px; padding: 24px; margin: 16px 0; box-shadow: none; }
+.brief-page .brief-cover::before, .brief-page .brief-cover::after { display: none; }
+.brief-page .il-hero-sub, .brief-page .il-hero-foot { color: #5c716b; }
+.brief-page .il-hero-state { color: #79571c; background: #fff6e3; border: 0; }
+.brief-page .il-hero-foot { font-size: 11px; border-color: #d0dbce; }
+.brief-page .row { display: flex; flex-wrap: wrap; gap: 8px; }
+.brief-eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 750; color: #1d6351; }
+.brief-nav { display: flex; gap: 5px; padding: 4px; background: #e9eee6; border-radius: 12px; margin: 22px 0; }
+.brief-nav button { flex: 1; min-width: 0; min-height: 44px; border: 0; border-radius: 9px; background: transparent; color: #173c38; cursor: pointer; font: inherit; font-size: 13px; }
+.brief-nav button[aria-pressed=true] { background: white; font-weight: 650; box-shadow: 0 1px 3px #173c3810; }
+.brief-page button:focus-visible, .brief-page a:focus-visible { outline: 3px solid #bd791c; outline-offset: 3px; }
+.brief-page .il-lead { font-size: 14px; line-height: 1.65; }
+.brief-page .il-muted { color: #5c716b; }
+.brief-gap { border-radius: 14px; background: #f8efd9; padding: 16px; margin: 20px 0; font-size: 13px; color: #715721; }
+.brief-gap p { margin: 8px 0 0; }
+.brief-page .il-grid3 { grid-template-columns: 1fr; }
+.brief-page .il-tl { border-left: 1px solid #d4e0d4; padding-left: 22px; margin: 23px 0 0 9px; }
+.brief-page .il-tl li { padding: 0 0 18px 0; margin: 0; }
+.brief-page .il-tl li::before { left: -28px; background: #e1eddb; border: 2px solid #74956b; }
+.brief-page .il-tl p { font-size: 14px; margin: 8px 0; }
+.brief-page .il-tl small, .brief-source p { font-size: 12px; line-height: 1.6; }
+.brief-source blockquote { border-left: 3px solid #aec5a4; padding: 3px 0 3px 12px; margin: 13px 0; font-size: 13px; color: #5c716b; }
+.brief-page .il-btn { border-radius: 14px; min-height: 44px; }
+.brief-page input, .brief-page textarea { font-size: 16px; max-width: 100%; box-sizing: border-box; }
+@media(max-width: 600px) { .brief-page.il-page { margin: 0 auto; border: 0; border-radius: 0; padding: 24px 22px; } }
+.brief-page .brief-cover h1 { color: #173c38; }
+.brief-page .brief-cover .il-hero-foot span { color: #5c716b; }
+.brief-page .brief-cover h1 { font-size: 31px; font-weight: 650; letter-spacing: -1px; line-height: 1.14; }
+.brief-page .brief-cover .il-mono { color: #5c716b; }
+
+// Laptop arrangement approved in the standalone preview; mobile rules remain unchanged.
+.brief-layout, .brief-summary, .brief-reading { display: contents; }
+@media (min-width: 900px) {
+  .brief-detail-page.il-page { max-width: 1160px; width: calc(100% - 40px); padding: 38px 44px 44px; border-radius: 26px; }
+  .brief-layout { display: grid; grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); gap: 52px; align-items: start; }
+  .brief-summary { display: block; min-width: 0; position: sticky; top: 28px; }
+  .brief-reading { display: block; min-width: 0; border-left: 1px solid #dce5df; padding-left: 36px; }
+  .brief-detail-page .brief-cover { padding: 30px; margin-top: 18px; }
+  .brief-detail-page .brief-cover h1 { font-size: 38px; line-height: 1.13; }
+  .brief-detail-page .il-hero-sub { font-size: 15px; line-height: 1.7; }
+  .brief-detail-page .brief-nav { margin-top: 0; margin-bottom: 28px; }
+  .brief-detail-page .brief-reading h2 { font-size: 24px; }
+  .brief-detail-page .il-tl li { padding-bottom: 32px; }
+}
+@media (min-width: 900px) and (max-width: 1100px) {
+  .brief-detail-page.il-page { padding: 32px; }
+  .brief-layout { gap: 30px; }
+  .brief-reading { padding-left: 28px; }
+  .brief-detail-page .brief-cover { padding: 24px; }
+  .brief-detail-page .brief-cover h1 { font-size: 34px; }
+}
+
+// Long real headlines and repeated quotations need a quieter desktop hierarchy.
+.brief-desktop-sources { display: none; }
+.brief-mobile-sources { display: contents; }
+@media (min-width: 900px) {
+  .brief-detail-page .brief-cover h1 { font-size: 28px; line-height: 1.22; letter-spacing: -.7px; margin: 18px 0 14px; }
+  .brief-detail-page .brief-cover { padding: 24px; }
+  .brief-detail-page .brief-summary { position: static; }
+  .brief-detail-page .brief-summary .il-alert { font-size: 13px; line-height: 1.6; border-radius: 14px; padding: 14px; }
+  .brief-detail-page .brief-summary .il-alert.info { color: #5c716b; background: #edf3e7; border-color: #dce5df; }
+  .brief-detail-page .brief-cover .il-mono { font-size: 10px; }
+  .brief-detail-page .brief-reading h2 { color: #173c38; font-size: 20px; letter-spacing: -.35px; }
+  .brief-detail-page .brief-reading a, .brief-detail-page .brief-reading a:visited { color: #1d6351; text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .brief-detail-page .brief-reading .il-card { box-shadow: none; }
+  .brief-detail-page .brief-source h2 { font-size: 18px; line-height: 1.4; margin: 8px 0 12px; }
+  .brief-detail-page .brief-source h2 a { text-decoration: none; }
+  .brief-detail-page .brief-source h2 a:hover { text-decoration: underline; }
+  .brief-desktop-sources { display: block; }
+  .brief-mobile-sources { display: none; }
+  .brief-source-intro { font-size: 13px; line-height: 1.6; }
+  .brief-source-group details { border-top: 1px solid #dce5df; padding-top: 12px; }
+  .brief-source-group summary { cursor: pointer; color: #1d6351; font-size: 13px; min-height: 32px; }
+  .brief-source-group summary:focus-visible { outline: 3px solid #bd791c; outline-offset: 3px; }
+  .brief-passage { padding: 14px 0 0; }
+  .brief-passage + .brief-passage { border-top: 1px solid #dce5df; margin-top: 14px; }
+}
+
+// Own the desktop page geometry inside the host: the shared il-page host-context
+// selector otherwise wins over the approved page margin/padding and heading rules.
+@media (min-width: 900px) {
+  :host-context(.ils) .brief-page.il-page {
+    width: calc(100% - 48px); max-width: 1160px; margin: 24px auto;
+    padding: 32px; min-height: auto; border-radius: 24px;
+  }
+  :host-context(.ils) .brief-page .il-head h1 { font-size: 30px; line-height: 1.2; letter-spacing: -.8px; color: #173c38; }
+  .brief-list-page { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); column-gap: 32px; align-items: start; }
+  .brief-list-page > .il-head, .brief-list-page > .il-alert { grid-column: 1 / -1; }
+  .brief-list-page > .il-head { max-width: 760px; margin-bottom: 8px; }
+  .brief-list-page > .il-alert { font-size: 13px; line-height: 1.6; border-radius: 12px; }
+  .brief-list-page > .il-card { margin: 16px 0 0; padding: 24px; min-width: 0; box-shadow: none; }
+  .brief-list-page .il-sub { font-size: 14px; line-height: 1.65; }
+  .brief-list-page .il-field { margin-top: 18px; }
+  .brief-list-page .il-input { border-radius: 10px; padding: 11px 12px; }
+  .brief-list-page .il-grid3 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .brief-list-page .il-grid3 label:last-child { grid-column: 1 / -1; }
+  .brief-list-page .il-list { padding: 0; margin: 0; list-style: none; }
+  .brief-list-page .il-list li { padding: 18px 0; border-bottom: 1px solid #dce5df; }
+  .brief-list-page .il-list li:last-child { border-bottom: 0; padding-bottom: 0; }
+  .brief-list-page .il-link { text-align: left; font-size: 14px; line-height: 1.5; font-weight: 600; color: #1d6351; text-decoration: none; }
+  .brief-list-page .il-link:hover { text-decoration: underline; }
+  .brief-list-page small { display: inline-block; margin-top: 6px; font-size: 12px; }
+  .brief-layout { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: 32px; }
+  .brief-reading { padding-left: 28px; }
+  .brief-detail-page .brief-cover h1 { font-size: 26px; line-height: 1.26; }
+  .brief-detail-page .brief-cover .row { align-items: flex-start; }
+  .brief-detail-page .brief-cover .il-mono { flex-basis: 100%; margin-top: 6px; }
+  .brief-detail-page .brief-summary { overflow-wrap: break-word; }
+  .brief-detail-page .brief-reading .il-lead { line-height: 1.75; }
+}
+// Below a wide laptop, the host's 232px sidebar makes two reading columns too narrow.
+@media (min-width: 900px) and (max-width: 1199px) {
+  :host-context(.ils) .brief-page.il-page { width: calc(100% - 32px); padding: 24px; margin: 16px auto; }
+  .brief-layout, .brief-list-page { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .brief-reading { padding-left: 0; border-left: 0; border-top: 1px solid #dce5df; padding-top: 24px; }
+  .brief-list-page > .il-card { margin-top: 0; }
+}
+
+.brief-local-selector, .brief-local-snapshot { margin: 20px 0; padding: 18px; border: 1px solid #dce5df; border-radius: 12px; min-width: 0; overflow-wrap: anywhere; }
+.brief-local-selector legend { font-size: 15px; font-weight: 600; width: auto; }
+.brief-local-toggle { display: flex; gap: 10px; align-items: center; min-height: 44px; }
+.brief-local-toggle input { width: 18px; height: 18px; }
+.brief-local-fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.brief-local-fields .il-field { min-width: 0; margin: 0; }
+.brief-local-fields input { min-width: 0; width: 100%; box-sizing: border-box; }
+.brief-local-counts { display: flex; gap: 28px; flex-wrap: wrap; }
+.brief-local-counts dd { font-size: 24px; margin: 4px 0; font-weight: 650; }
+.brief-local-snapshot summary { cursor: pointer; padding: 12px 0; min-height: 44px; box-sizing: border-box; }
+.brief-local-breakdown > div { display: flex; justify-content: space-between; gap: 16px; padding: 7px 0; border-bottom: 1px solid #dce5df; }
+.brief-local-breakdown dd { margin: 0; }
+.brief-local-snapshot h3 { font-size: 15px; margin-top: 18px; }
+@media (max-width: 420px) { .brief-local-fields { grid-template-columns: minmax(0, 1fr); } }

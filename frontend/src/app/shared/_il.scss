@@ -1,0 +1,127 @@
+// IncidentLens design tokens — light, futuristic, navy/teal. Text contrast ≥ 4.5:1 on the light surfaces
+// (navy #0b2545 on #f4f8fa ≈ 14:1; teal #0b6e78 on white ≈ 5.6:1). Status is never colour-only: every chip
+// carries text + a symbol.
+$il-navy: #0b2545;
+$il-navy-2: #13315c;
+$il-teal: #0b6e78;
+$il-teal-soft: #e3f3f4;
+$il-bg: #f4f8fa;
+$il-surface: #ffffff;
+$il-line: #d5e3e8;
+$il-muted: #4a5d6e;      // ≈ 6.4:1 on white
+$il-warn: #8a5a00;       // ≈ 5.9:1 on white
+$il-warn-soft: #fff4dc;
+$il-danger: #a61b29;     // ≈ 6.7:1 on white
+$il-danger-soft: #fde8ea;
+$il-ok: #1d6b3a;         // ≈ 6.4:1 on white
+$il-ok-soft: #e4f4ea;
+$il-radius: 10px;
+$il-focus: 0 0 0 3px rgba(11, 110, 120, .45);
+
+%il-card { background: $il-surface; border: 1px solid $il-line; border-radius: $il-radius; box-shadow: 0 1px 2px rgba(11, 37, 69, .06); }
+
+@mixin il-focus { &:focus-visible { outline: none; box-shadow: $il-focus; } }
+
+@mixin il-page {
+  :host { display: block; color: $il-navy; }
+  .il-page { background: $il-bg; margin: -10px -24px 0 -27px; padding: 16px 20px 32px; min-height: 100%; }
+  // IncidentLens mode: the extension shell owns the frame, so drop the host-padding compensation.
+  :host-context(.ils) .il-page { margin: 0; padding: 26px 32px 40px; min-height: auto; }
+  :host-context(.ils) .il-head h1 { font-size: 1.6rem; letter-spacing: -.01em; font-weight: 700; }
+  @media (max-width: 900px) { :host-context(.ils) .il-page { padding: 18px 14px 32px; } }
+  .il-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .il-head h1 { font-size: 1.35rem; margin: 0; color: $il-navy; font-weight: 650; letter-spacing: .01em; }
+  .il-sub { color: $il-muted; margin: 2px 0 0; font-size: .92rem; }
+  .il-grow { flex: 1 1 auto; }
+  .il-card { @extend %il-card; padding: 14px 16px; margin-bottom: 14px; }
+  .il-card h2 { font-size: 1.02rem; margin: 0 0 10px; color: $il-navy; font-weight: 650; }
+  .il-grid { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .il-grid-3 { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+  @media (max-width: 900px) { .il-grid { grid-template-columns: minmax(0, 1fr); } }
+  .il-kv { display: grid; grid-template-columns: max-content 1fr; gap: 4px 14px; margin: 0; }
+  .il-kv dt { color: $il-muted; font-weight: 500; }
+  .il-kv dd { margin: 0; }
+  .il-tile { border: 1px solid $il-line; border-radius: 8px; padding: 8px 10px; background: #fbfdfe; }
+  .il-tile .k { color: $il-muted; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; }
+  .il-tile .v { font-weight: 600; }
+  .il-muted { color: $il-muted; }
+  .il-mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .86em; }
+  .il-btn { border: 1px solid $il-teal; background: $il-teal; color: #fff; border-radius: 8px; padding: 7px 14px; font-weight: 600; cursor: pointer; @include il-focus; }
+  .il-btn:disabled { opacity: .55; cursor: not-allowed; }
+  .il-btn.ghost { background: #fff; color: $il-teal; }
+  .il-btn.danger { background: $il-danger; border-color: $il-danger; }
+  .il-btn.sm { padding: 4px 10px; font-size: .85rem; }
+  .il-link { color: $il-teal; text-decoration: underline; background: none; border: 0; padding: 0; cursor: pointer; @include il-focus; }
+  .il-field { display: block; margin-bottom: 10px; }
+  .il-field > span { display: block; font-weight: 600; margin-bottom: 4px; }
+  .il-field small { color: $il-muted; }
+  .il-input { width: 100%; border: 1px solid #9fb6c1; border-radius: 8px; padding: 7px 10px; background: #fff; color: $il-navy; @include il-focus; }
+  .il-alert { border-radius: 8px; padding: 9px 12px; margin-bottom: 10px; border: 1px solid; }
+  .il-alert.err { background: $il-danger-soft; border-color: #f2b8bf; color: $il-danger; }
+  .il-alert.warn { background: $il-warn-soft; border-color: #f0d49a; color: $il-warn; }
+  .il-alert.info { background: $il-teal-soft; border-color: #b6dfe2; color: $il-navy; }
+  .il-next { border-left: 4px solid $il-teal; background: #fff; padding: 7px 12px; margin: 0 0 10px; color: $il-navy; border-radius: 0 8px 8px 0; }
+  details.il-prov > summary { cursor: pointer; list-style-position: outside; @include il-focus; }
+  details.il-prov[open] > summary { margin-bottom: 8px; }
+  // summary cards · incident queue beside detail · navy hero (approved IncidentLens design)
+  .il-stats { list-style: none; margin: 0 0 18px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; }
+  .il-stats li { @extend %il-card; display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 14px; }
+  .il-stats .ico { width: 40px; height: 40px; border-radius: 10px; background: $il-teal-soft; color: $il-teal; display: grid; place-items: center; flex: none; }
+  .il-stats strong { font-size: 1.7rem; font-weight: 700; min-width: 30px; }
+  .il-stats li > span:last-child { color: $il-muted; font-size: .86rem; }
+  .il-iq-split { display: grid; grid-template-columns: minmax(260px, 340px) 1fr; gap: 18px; align-items: start; }
+  @media (max-width: 1000px) { .il-iq-split { grid-template-columns: 1fr; } }
+  .il-iq h2 { display: flex; align-items: center; justify-content: space-between; }
+  .il-count { background: $il-bg; border: 1px solid $il-line; border-radius: 6px; padding: 0 7px; font-size: .78rem; color: $il-muted; }
+  .il-seg { display: flex; gap: 6px; flex-wrap: wrap; margin: 0 0 10px; }
+  .il-seg button { border: 1px solid $il-line; background: $il-bg; border-radius: 8px; padding: 5px 10px; font-size: .8rem; color: $il-navy; cursor: pointer; @include il-focus; }
+  .il-seg button[aria-pressed='true'] { background: $il-teal-soft; border-color: #b6dfe2; color: $il-teal; font-weight: 700; }
+  .il-iq-list { list-style: none; margin: 0 -16px -16px; padding: 0; max-height: 62vh; overflow-y: auto; }
+  .il-iq-item { display: grid; gap: 4px; width: 100%; text-align: left; background: #fff; border: 0; border-top: 1px solid $il-line; border-left: 4px solid transparent;
+    padding: 12px 16px; cursor: pointer; color: $il-navy; @include il-focus;
+    &:hover { background: $il-bg; } &.sel { background: $il-teal-soft; border-left-color: $il-teal; }
+    .row { display: flex; justify-content: space-between; gap: 8px; font-size: .8rem; } strong { font-size: .95rem; } }
+  .il-pri { display: inline-block; border-radius: 6px; padding: 1px 8px; font-size: .78rem; font-weight: 700; background: $il-bg; color: $il-navy; border: 1px solid $il-line; }
+  .il-pri[data-p='P1'] { background: $il-danger-soft; color: $il-danger; border-color: #f2b8bf; }
+  .il-pri[data-p='P2'] { background: $il-warn-soft; color: $il-warn; border-color: #f0d49a; }
+  .il-hero { background: linear-gradient(135deg, #0d2238 0%, #13315c 100%); color: #fff; border-radius: 16px; padding: 22px 26px; margin-bottom: 14px;
+    .row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    h1, h2 { color: #fff; font-size: 1.55rem; margin: 14px 0 4px; letter-spacing: -.01em; font-weight: 700; }
+    .il-mono { color: #e6eef6; } }
+  .il-hero-state { border: 1px solid rgba(255,255,255,.35); border-radius: 6px; padding: 1px 8px; font-size: .78rem; font-weight: 700; }
+  .il-hero-sub { color: #dbe6f0; margin: 0; }
+  .il-hero-foot { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; border-top: 1px solid rgba(255,255,255,.18); margin-top: 16px; padding-top: 14px;
+    > span { flex: 1; color: #e6eef6; } }
+  .il-hero-btn { background: #fff; color: $il-navy; border: 1px solid #fff; border-radius: 9px; padding: 9px 16px; font-weight: 700; cursor: pointer;
+    &:hover { background: $il-teal-soft; } &:focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(127, 214, 203, .9); } &:disabled { opacity: .6; } }
+  .il-h3 { font-size: 1rem; margin: 0 0 8px; }
+  // AI triage + nearest facilities
+  .il-ai-top { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  @media (max-width: 900px) { .il-ai-top { grid-template-columns: 1fr; } }
+  .il-corr { display: inline-block; border-radius: 6px; padding: 1px 9px; font-weight: 800; font-size: .8rem; text-transform: uppercase;
+    letter-spacing: .04em; border: 1px solid $il-line; background: $il-bg; }
+  .il-corr[data-level='strong'] { background: $il-ok-soft; color: $il-ok; border-color: #b8e0c6; }
+  .il-corr[data-level='medium'] { background: $il-warn-soft; color: $il-warn; border-color: #f0d49a; }
+  .il-corr[data-level='low'] { background: $il-danger-soft; color: $il-danger; border-color: #f2b8bf; }
+  .il-fac { list-style: none; margin: 0; padding: 0; }
+  .il-fac li { display: flex; gap: 10px; align-items: center; border: 1px solid $il-line; border-radius: 10px; padding: 9px 12px; margin-bottom: 8px; background: #fff; }
+  .il-fac a { color: $il-teal; }
+  .il-alert.ok { background: $il-ok-soft; border-color: #b8e0c6; color: $il-ok; }
+  .il-table { width: 100%; border-collapse: collapse; }
+  .il-table th { text-align: left; font-size: .8rem; color: $il-muted; text-transform: uppercase; letter-spacing: .04em; border-bottom: 1px solid $il-line; padding: 6px 8px; }
+  .il-table td { border-bottom: 1px solid #eaf1f4; padding: 8px; vertical-align: top; }
+  .il-table tr.sel td { background: $il-teal-soft; }
+  .il-tabs { display: flex; gap: 4px; border-bottom: 1px solid $il-line; margin-bottom: 12px; flex-wrap: wrap; }
+  .il-tabs button { background: none; border: 0; border-bottom: 3px solid transparent; padding: 8px 12px; color: $il-muted; font-weight: 600; cursor: pointer; @include il-focus; }
+  .il-tabs button[aria-selected="true"] { color: $il-navy; border-bottom-color: $il-teal; }
+  .il-badge { display: inline-block; border-radius: 999px; padding: 1px 9px; font-size: .78rem; font-weight: 700; border: 1px solid; }
+  .il-badge.fixture { background: $il-warn-soft; color: $il-warn; border-color: #f0d49a; }
+  .il-badge.sim { background: #eef1f6; color: $il-navy-2; border-color: #c9d3e3; }
+  .il-photo { width: 100%; max-height: 360px; object-fit: contain; background: #0b2545; border-radius: 8px; }
+  .il-list { list-style: none; padding: 0; margin: 0; }
+  .il-list > li { border-bottom: 1px solid #eaf1f4; padding: 8px 0; }
+  .il-timeline { list-style: none; padding: 0; margin: 0; }
+  .il-timeline li { display: flex; gap: 10px; padding: 6px 0; }
+  .il-timeline .mark { width: 22px; flex: 0 0 22px; text-align: center; font-weight: 700; }
+  .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+}

@@ -1,0 +1,19 @@
+@use '../shared/il' as *;
+@include il-page;
+.il-filters { display: flex; gap: 10px; flex-wrap: wrap; align-items: end; margin-bottom: 10px; }
+.il-filters .il-field { margin: 0; min-width: 160px; }
+.il-row-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.il-split { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); gap: 14px; }
+@media (max-width: 1000px) { .il-split { grid-template-columns: minmax(0, 1fr); } }
+.il-blocks { display: grid; gap: 14px; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+@media (max-width: 900px) { .il-blocks { grid-template-columns: minmax(0, 1fr); } }
+.il-prov { border-left: 4px solid $il-line; padding-left: 10px; }
+.il-prov.model { border-left-color: $il-teal; }
+.il-chips { display: flex; gap: 6px; flex-wrap: wrap; margin: 4px 0; }
+.il-chip { border: 1px solid $il-line; border-radius: 999px; padding: 1px 9px; font-size: .82rem; background: #fbfdfe; }
+.il-team { border: 1px solid $il-line; border-radius: 10px; padding: 10px 12px; margin-bottom: 10px; background: #fff; }
+.il-team h3 { font-size: .98rem; margin: 0 0 4px; }
+.il-panel { border: 1px solid #b6dfe2; background: #f5fbfc; border-radius: 10px; padding: 12px 14px; margin: 10px 0; }
+.il-roster { list-style: none; padding: 0; margin: 0; display: grid; gap: 4px; }
+.il-roster label { display: flex; gap: 8px; align-items: center; }
+.il-warn-text { color: $il-warn; font-weight: 600; }

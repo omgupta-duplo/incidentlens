@@ -1,0 +1,275 @@
+@use '../shared/il' as *;
+@include il-page;
+
+// ── Reporter design (approved mobile-first reference): mobile-first with an approved two-column laptop arrangement ─────────────
+$rp-ink: #173c38; $rp-muted: #5c716b; $rp-green: #1d6351; $rp-line: #dce5df; $rp-paper: #f8faf6; $rp-mint: #e6f0e7;
+
+.rp { max-width: 430px; margin: 0 auto; color: $rp-ink; font-size: 16px; line-height: 1.5; background: $rp-paper;
+      border: 1px solid #d0dbd2; border-radius: 28px; overflow: hidden; box-shadow: 0 20px 70px rgba(23, 60, 56, .08); }
+:host-context(.ils) .il-page.rp-page { background: #e8eee8; padding-top: 20px; }
+.rp-main { padding: 26px 24px 20px; min-height: 560px; }
+@media (max-width: 600px) {
+  :host-context(.ils) .il-page.rp-page { padding: 0; background: $rp-paper; }
+  .il-page.rp-page { padding: 0; }
+  .rp { border-radius: 0; border-left: 0; border-right: 0; box-shadow: none; }
+  .rp-main { padding: 24px 22px; }
+}
+
+.rp h1 { font-size: 34px; font-weight: 650; line-height: 1.12; letter-spacing: -1.3px; margin: 9px 0 15px; color: $rp-ink; }
+.rp h1:focus { outline: none; }
+.rp h1:focus-visible { outline: 3px solid #bd791c; outline-offset: 3px; }
+.rp h2 { font-size: 19px; line-height: 1.25; letter-spacing: -.4px; margin: 0 0 10px; color: $rp-ink; }
+.rp h3 { font-size: 15px; margin: 0 0 6px; }
+.rp p { margin: 0 0 16px; }
+.rp-eyebrow { display: inline-block; font-size: 11px; letter-spacing: .13em; text-transform: uppercase; font-weight: 750; color: $rp-green; }
+.rp-muted { color: $rp-muted; }
+.rp-small { font-size: 13px; }
+.rp-row { display: flex; gap: 12px; align-items: center; }
+.rp-between { justify-content: space-between; }
+.rp-pill { display: inline-flex; align-items: center; gap: 6px; background: $rp-mint; color: #285a48; border-radius: 25px; padding: 5px 9px; font-size: 11px; font-weight: 650; }
+.rp-pill.warn { background: #fbefd4; color: #79571c; }
+
+.rp button { font: inherit; cursor: pointer; border: 0; color: inherit; }
+.rp button:focus-visible, .rp input:focus-visible, .rp textarea:focus-visible, .rp select:focus-visible, .rp summary:focus-visible,
+.rp a:focus-visible { outline: 3px solid #bd791c; outline-offset: 3px; }
+.rp button:disabled { opacity: .45; cursor: not-allowed; }
+.rp-primary, .rp-secondary { display: block; width: 100%; min-height: 52px; border-radius: 14px; padding: 13px 17px; font-weight: 650; text-align: center; }
+.rp-primary { background: $rp-green !important; color: #fff !important; box-shadow: 0 5px 12px rgba(29, 99, 81, .09); }
+.rp-secondary { background: #fff !important; border: 1px solid $rp-line !important; color: $rp-ink; margin-top: 10px; }
+.rp-text { background: transparent !important; padding: 10px 0; min-height: 44px; color: $rp-green !important; font-size: 13px; font-weight: 650; }
+
+.rp-card { background: #fff; border: 1px solid $rp-line; border-radius: 19px; padding: 19px; margin: 16px 0; }
+.rp-hero { background: #163f37; color: #f9fcf5; border-radius: 22px; padding: 24px; position: relative; overflow: hidden; }
+.rp-hero h2 { font-size: 26px; max-width: 215px; letter-spacing: -.7px; line-height: 1.18; color: #f9fcf5; }
+.rp-hero p { font-size: 13px; color: #c9ded1; max-width: 235px; }
+.rp-hero .rp-eyebrow { color: #cce3ae; margin-bottom: 16px; }
+.rp-hero .rp-primary { background: #e4f0cf !important; color: $rp-ink !important; margin-top: 14px; position: relative; }
+.rp-orb { position: absolute; width: 160px; height: 160px; border: 1px solid rgba(205, 230, 208, .19); border-radius: 50%; right: -70px; top: 12px;
+          box-shadow: 0 0 0 25px rgba(205, 230, 208, .04), 0 0 0 50px rgba(205, 230, 208, .03); }
+.rp-safe { display: flex; gap: 10px; font-size: 12px; color: $rp-muted; margin: 19px 0; }
+.rp-safe b { color: $rp-green; }
+
+.rp-report { width: 100%; text-align: left; border: 1px solid $rp-line !important; border-radius: 17px; padding: 15px; background: #fff !important;
+             display: flex; align-items: center; gap: 13px; margin: 12px 0; }
+.rp-report strong { display: block; font-size: 14px; }
+.rp-report small { font-size: 12px; color: $rp-muted; }
+.rp-thumb { width: 54px; height: 58px; flex-shrink: 0; border-radius: 12px; overflow: hidden; background: #c6dbd6; }
+.rp-chevron { margin-left: auto; font-size: 20px; color: $rp-muted; }
+.rp-empty { padding: 30px 15px; text-align: center; }
+.rp-empty p { font-size: 14px; color: $rp-muted; }
+.rp-icon { width: 66px; height: 66px; border-radius: 50%; background: #dfecd5; color: $rp-green; display: grid; place-items: center; font-size: 30px; margin: 20px 0; }
+.rp-empty .rp-icon { margin: 15px auto; }
+
+// photos (shared il-auth-image restyled only inside reporter screens)
+.rp-photo { border-radius: 18px; overflow: hidden; position: relative; background: #dce8dc; }
+.rp-photo .rp-label { position: absolute; bottom: 12px; left: 12px; background: rgba(23, 60, 56, .86); color: #fff; padding: 5px 9px; border-radius: 6px; font-size: 11px; }
+:host ::ng-deep .rp-photo il-auth-image img, :host ::ng-deep .rp-photo > img { display: block; width: 100%; height: 215px; max-height: none; object-fit: cover; background: #dce8dc; border-radius: 0; }
+:host ::ng-deep .rp-thumb il-auth-image img { width: 54px; height: 58px; max-height: none; object-fit: cover; border-radius: 0; background: #c6dbd6; }
+:host ::ng-deep .rp-thumb il-auth-image .ph { padding: 0; height: 58px; border: 0; font-size: 0; }
+
+// wizard
+.rp-toolbar { display: flex; justify-content: space-between; margin: -10px 0 8px; }
+.rp-steps { display: flex; gap: 6px; margin: 18px 0 24px; padding: 0; list-style: none; }
+.rp-steps li { height: 4px; flex: 1; border-radius: 5px; background: #dce5dc; }
+.rp-steps li.done { background: $rp-green; }
+.rp-capture { border: 1.5px dashed #a9beb1; background: #eff4eb; border-radius: 20px; padding: 26px 18px; text-align: center; margin: 22px 0; }
+.rp-capture p { font-size: 13px; color: $rp-muted; }
+.rp-seg { display: flex; gap: 5px; padding: 4px; background: #e9eee6; border-radius: 12px; margin: 0 0 14px; }
+.rp-seg button { flex: 1; min-height: 44px; border-radius: 9px; background: none; font-size: 13px; }
+.rp-seg button[aria-pressed="true"] { background: #fff; font-weight: 650; }
+.rp label.rp-label-block { display: block; font-size: 13px; font-weight: 600; margin: 18px 0 7px; }
+.rp .rp-input { width: 100%; border: 1px solid #cddbd1; border-radius: 12px; padding: 13px; background: #fff; color: $rp-ink; font-size: 16px; box-sizing: border-box; font-family: inherit; }
+.rp textarea.rp-input { resize: vertical; min-height: 100px; }
+.rp-coords { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.rp-coords label { margin: 10px 0 0 !important; }
+.rp-hint { border-radius: 14px; background: #f8efd9; padding: 14px; font-size: 13px; color: #715721; margin: 18px 0; }
+.rp-ok { border-radius: 14px; background: #e6f0e7; padding: 14px; font-size: 13px; color: #285a48; margin: 14px 0; }
+.rp-err { border-radius: 14px; background: #fbe4e1; padding: 14px; font-size: 13px; color: #8a2a1d; margin: 14px 0; }
+.rp-actions { margin-top: 24px; }
+.rp details { border-top: 1px solid $rp-line; padding: 14px 0; }
+.rp summary { cursor: pointer; font-size: 14px; font-weight: 600; min-height: 32px; }
+.rp-map { margin-top: 20px; border-radius: 17px; overflow: hidden; }
+
+// progress
+.rp-bar { height: 6px; background: #e1eadf; border-radius: 10px; margin: 28px 0; overflow: hidden; position: relative; }
+.rp-bar span { position: absolute; inset: 0 auto 0 0; width: 35%; background: $rp-green; border-radius: 10px; animation: rp-slide 1.2s ease-in-out infinite; }
+@keyframes rp-slide { 0% { left: -35%; } 100% { left: 100%; } }
+.rp-timeline { list-style: none; padding: 0; margin: 23px 0; }
+.rp-timeline li { padding: 0 0 24px 31px; position: relative; border-left: 1px solid #d4e0d4; margin-left: 9px; }
+.rp-timeline li:last-child { border-left-color: transparent; padding-bottom: 0; }
+.rp-timeline li .mk { position: absolute; left: -10px; top: 0; width: 20px; height: 20px; background: #e1eddb; color: $rp-green; border-radius: 50%;
+                      text-align: center; font-size: 12px; line-height: 20px; }
+.rp-timeline li.pending .mk, .rp-timeline li.skipped .mk { background: #e7ece6; color: #6c8073; }
+.rp-timeline li.now .mk { background: $rp-green; color: #fff; }
+.rp-timeline strong { display: block; font-size: 14px; }
+.rp-timeline p { font-size: 12px; color: $rp-muted; margin: 4px 0 0; }
+.rp-timeline li.skipped strong { color: $rp-muted; text-decoration: line-through; }
+.rp-kv { margin: 0; font-size: 13px; }
+.rp-kv dt { color: $rp-muted; font-size: 12px; margin-top: 8px; }
+.rp-kv dd { margin: 0; overflow-wrap: anywhere; }
+
+// bottom navigation (reporter screens)
+.rp-nav { display: flex; border-top: 1px solid $rp-line; background: #fff; padding: 8px 16px 12px; position: sticky; bottom: 0; z-index: 2; }
+.rp-nav a { flex: 1; color: $rp-muted; font-size: 12px; min-height: 52px; border-radius: 12px; text-align: center; text-decoration: none; padding-top: 4px; }
+.rp-nav a[aria-current="page"] { background: #edf4e8; color: $rp-green; font-weight: 700; }
+.rp-nav b { display: block; font-size: 19px; font-weight: 400; line-height: 23px; }
+
+@media (prefers-reduced-motion: reduce) { .rp-bar span { animation: none; width: 100%; opacity: .5; } }
+
+// shared camera component restyled only inside the reporter capture card
+:host ::ng-deep .rp-capture il-camera-capture .stage { border-radius: 18px; background: #dce8dc; }
+:host ::ng-deep .rp-capture il-camera-capture .bar { justify-content: center; }
+:host ::ng-deep .rp-capture il-camera-capture button { min-height: 48px; border-radius: 14px; padding: 12px 18px; background: #1d6351; border-color: #1d6351; color: #fff; font-weight: 650; }
+:host ::ng-deep .rp-capture il-camera-capture button.ghost { background: #fff; color: #1d6351; border-color: #dce5df; }
+
+// Display-contents wrappers preserve the mobile document flow and existing interactions.
+.rp-layout, .rp-column, .rp-side { display: contents; }
+.rp-desktop-context { display: none; }
+@media (min-width: 900px) {
+  .rp { width: 100%; max-width: 1160px; border-radius: 26px; }
+  .rp-main { padding: 38px 44px 44px; min-height: 620px; }
+  .rp-layout { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 52px; align-items: start; }
+  .rp-column { display: block; min-width: 0; width: 100%; max-width: 560px; margin: 0 auto; }
+  .rp-side { display: block; min-width: 0; border-left: 1px solid $rp-line; padding-left: 30px; }
+  .rp-side .rp-report { align-items: flex-start; padding: 13px; gap: 9px; }
+  .rp-side .rp-report > span { min-width: 0; overflow-wrap: anywhere; }
+  .rp-side .rp-thumb { width: 42px; height: 48px; }
+  :host ::ng-deep .rp-side .rp-thumb il-auth-image img { width: 42px; height: 48px; }
+  .rp-side .rp-report strong { font-size: 13px; }
+  .rp-side .rp-pill { font-size: 10px; }
+  .rp-side .rp-eyebrow { margin: 3px 0 13px; }
+  .rp-desktop-context h2 { font-size: 24px; letter-spacing: -.7px; }
+  .rp-desktop-context .rp-card { background: #edf3e7; border: 0; }
+  .rp-hero { padding: 30px; }
+  .rp-hero h2 { max-width: 300px; font-size: 30px; }
+  .rp-hero p { max-width: 320px; }
+  .rp-capture { padding: 28px 22px; }
+  :host ::ng-deep .rp-photo il-auth-image img, :host ::ng-deep .rp-photo > img { height: 280px; }
+  .rp-nav { padding: 10px 36px; gap: 12px; }
+  .rp-nav a { flex: 0 0 150px; min-height: 44px; }
+  .rp-nav b { display: inline; margin-right: 10px; vertical-align: middle; }
+  .rp-list-layout { grid-template-columns: minmax(0, .65fr) minmax(0, 1fr); }
+}
+@media (min-width: 900px) and (max-width: 1100px) {
+  .rp-main { padding: 32px; }
+  .rp-layout { gap: 30px; grid-template-columns: minmax(0, 1fr) 280px; }
+  .rp-side { padding-left: 24px; }
+}
+
+// Balanced desktop columns in the actual shell, without a mobile card floating
+// in an oversized grid track. Mobile rules and document flow stay unchanged.
+@media (min-width: 900px) {
+  :host-context(.ils) .il-page.rp-page { padding: 24px; }
+  .rp-main { padding: 32px; min-height: 0; }
+  .rp-layout { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); gap: 32px; }
+  .rp-column { max-width: none; margin: 0; }
+  .rp-side { padding-left: 28px; }
+  .rp-side .rp-report { gap: 12px; padding: 16px; align-items: center; }
+  .rp-side .rp-report strong { font-size: 14px; line-height: 1.45; }
+  .rp-side .rp-report small { display: block; margin-top: 4px; line-height: 1.6; }
+  .rp-side .rp-report small .il-mono { display: block; font-size: 11px; }
+  .rp-side .rp-report br { display: none; }
+  .rp-side .rp-pill { font-size: 11px; margin-top: 9px; line-height: 1.5; }
+  .rp-side .rp-thumb { width: 50px; height: 58px; }
+  :host ::ng-deep .rp-side .rp-thumb il-auth-image img { width: 50px; height: 58px; }
+  .rp .rp-safe { margin: 20px 0 0; line-height: 1.7; }
+  .rp-hero { margin-top: 24px; }
+  .rp-nav { padding: 10px 32px; }
+  .rp-list-layout { grid-template-columns: minmax(0, .65fr) minmax(0, 1.35fr); }
+}
+@media (min-width: 900px) and (max-width: 1199px) {
+  :host-context(.ils) .il-page.rp-page { padding: 16px; }
+  .rp-main { padding: 24px; }
+  .rp-layout { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .rp-side { border-left: 0; padding-left: 0; border-top: 1px solid #dce5df; padding-top: 24px; }
+  .rp-desktop-context { display: none; }
+}
+
+// Home has a single submission-focused column; history belongs only to My reports.
+@media (min-width: 900px) {
+  .rp-layout.rp-home-layout { grid-template-columns: minmax(0, 1fr); max-width: 720px; margin-inline: auto; }
+  .rp-home-layout .rp-hero { margin-top: 18px; padding: 24px; }
+  .rp-home-layout .rp-safe { margin-top: 16px; }
+}
+
+// ── One-page submission form (photo · location · details · submit) ────────────────────────────────────────────
+.rp-home-history { margin: 4px 0 0; }
+.rp-form-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 8px; }
+.rp-form-head h1 { margin: 6px 0 8px; }
+.rp-form-head p { margin: 0; max-width: 62ch; }
+.rp-form-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; margin-top: 16px; }
+.rp-panel { background: #fff; border: 1px solid $rp-line; border-radius: 19px; padding: 18px; min-width: 0; }
+.rp-panel h2 { display: flex; align-items: center; gap: 8px; font-size: 17px; margin: 0 0 12px; }
+.rp-num { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: $rp-mint; color: $rp-green; font-size: 13px; font-weight: 750; flex-shrink: 0; }
+.rp-tag { margin-left: auto; font-size: 11px; font-weight: 650; letter-spacing: .02em; color: #79571c; background: #fbefd4; border-radius: 20px; padding: 3px 9px; }
+.rp-tag.ok { color: #285a48; background: $rp-mint; }
+.rp-panel .rp-capture { margin: 0; padding: 14px; text-align: left; }
+.rp-panel .rp-seg { margin-bottom: 12px; }
+.rp-panel-note { margin: 10px 0 0 !important; }
+.rp-locate { margin-top: 0 !important; min-height: 46px; }
+.rp-geo { margin: 10px 0 !important; }
+.rp-panel .rp-map { margin-top: 10px; }
+.rp-panel label.rp-label-block { margin: 12px 0 6px; }
+.rp-count { margin: 6px 0 0 !important; }
+.rp-submit-btn { margin-top: 14px; }
+.rp-submit-why { margin: 8px 0 0 !important; }
+.rp-phone { margin-top: 12px; padding: 10px 0 0; }
+.rp-phone summary { font-size: 13px; }
+.rp-phone input:disabled { background: #f1f4ef; color: $rp-muted; cursor: not-allowed; }
+.rp-dict { margin-top: 12px; }
+.rp-label-inline { display: block; font-size: 13px; font-weight: 600; margin: 0 0 6px; }
+.rp-dict-row { display: flex; gap: 8px; align-items: stretch; flex-wrap: wrap; }
+.rp-dict-lang { flex: 1 1 160px; min-width: 0; width: auto !important; }
+.rp-mic { flex: 0 0 auto; min-height: 48px; padding: 0 16px; border-radius: 12px; background: #fff !important; border: 1px solid $rp-line !important; color: $rp-green !important; font-weight: 650; }
+.rp-dict-status { margin: 6px 0 0 !important; }
+.rp-dict-add { width: auto; margin-top: 8px; }
+.rp-done { max-width: 560px; margin: 0 auto; }
+:host ::ng-deep .rp-panel .rp-capture il-camera-capture .stage { max-height: 240px; aspect-ratio: 4 / 3; }
+
+// laptops: the three sections side by side so photo, location, details and Submit are visible together
+@media (min-width: 900px) {
+  .rp.rp-form-shell { max-width: 1240px; }
+  .rp-form-shell .rp-main { padding: 20px 24px 22px; }
+  .rp-form-head h1 { font-size: 28px; letter-spacing: -.8px; }
+  .rp-form-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; align-items: start; margin-top: 12px; }
+  .rp-panel { padding: 16px; }
+  :host ::ng-deep .rp-panel .rp-capture il-camera-capture .stage { max-height: 210px; }
+  :host ::ng-deep .rp-panel .rp-photo > img { height: 170px; }
+  :host ::ng-deep .rp-panel .rp-map il-geo-map .map { height: 190px; }
+  :host ::ng-deep .rp-panel .rp-map il-geo-map .panel { padding: 10px 12px; font-size: 13px; }
+  .rp-panel textarea.rp-input { min-height: 84px; }
+}
+@media (min-width: 900px) and (max-width: 1199px) {
+  :host-context(.ils) .il-page.rp-page { padding: 12px; }
+  .rp-form-grid { gap: 12px; }
+  .rp-panel { padding: 14px; }
+}
+@media (min-width: 900px) {
+  .rp-form-head .rp-eyebrow { display: none; }
+  .rp-form-head h1 { margin: 0 0 6px; }
+  .rp-form-head p { max-width: none; }
+  .rp-phone { margin-top: 8px; padding-top: 8px; }
+  .rp-submit-btn { margin-top: 10px; }
+}
+
+// The dictation controls are their own (encapsulated) component, so the .rp-scoped control styles are repeated here.
+.rp-dict { color: $rp-ink; font-size: 16px; line-height: 1.5; }
+.rp-dict .rp-input { width: 100%; border: 1px solid #cddbd1; border-radius: 12px; padding: 12px 13px; background: #fff; color: $rp-ink; font-size: 16px; box-sizing: border-box; font-family: inherit; }
+.rp-dict textarea.rp-input { resize: vertical; min-height: 84px; }
+.rp-dict button { font: inherit; cursor: pointer; }
+.rp-dict button:disabled { opacity: .45; cursor: not-allowed; }
+.rp-dict button:focus-visible, .rp-dict select:focus-visible, .rp-dict textarea:focus-visible { outline: 3px solid #bd791c; outline-offset: 3px; }
+.rp-dict label.rp-label-block { display: block; font-size: 13px; font-weight: 600; margin: 12px 0 6px; }
+.rp-dict .rp-small { font-size: 13px; }
+.rp-dict .rp-muted { color: $rp-muted; }
+
+/* Compact inline dictation controls; no separate transcript panel. */
+.rp-note-compose { border: 1px solid #cddbd1; border-radius: 12px; background: #fff; overflow: hidden; }
+.rp-note-compose > textarea.rp-input { border: 0; border-radius: 0; margin: 0; min-height: 108px; }
+.rp-note-compose > textarea.rp-input:focus-visible { outline-offset: -3px; }
+.rp-note-tools { display:flex; justify-content:flex-end; align-items:center; gap:8px; padding:0 8px 6px; }
+.rp-note-language { border:0; background:transparent; color:#52665a; font:inherit; font-size:13px; max-width:135px; min-height:40px; }
+.rp-note-mic { width:44px; height:44px; display:grid; place-items:center; border:1px solid #cddbd1; border-radius:50%; background:#edf5ef; color:#214c3b; cursor:pointer; }
+.rp-note-mic.listening { background:#a53429; color:white; }
+.rp-note-mic:focus-visible,.rp-note-language:focus-visible { outline:3px solid #bd791c; outline-offset:2px; }
+.rp-note-status { font-size:12px; color:#52665a; margin:0; padding:0 12px 9px; line-height:1.4; }

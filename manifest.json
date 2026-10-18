@@ -1,0 +1,194 @@
+{
+  "manifestVersion": "1.0",
+  "id": "duplo.incidentlens",
+  "name": "IncidentLens",
+  "version": "0.3.26-rc.2",
+  "description": "Civic incident reporting, AI-assisted evidence review and multi-agency response (local demo).",
+  "sdkVersion": "1.0.6",
+  "backend": {
+    "assemblyDir": "duplo.incidentlens/0.3.26-rc.2/backend",
+    "entryAssembly": "Duplo.Extension.IncidentLens.dll"
+  },
+  "resources": [
+    {
+      "ticketOriginType": "IncidentLensReport",
+      "restSegment": "extensions/incidentlens-reports",
+      "subType": "incidentlens-report",
+      "archetype": "typed",
+      "registrar": "DevOpsResource",
+      "entityType": "Duplo.Extension.IncidentLens.IncidentLensReport",
+      "specType": "Duplo.Extension.IncidentLens.IncidentLensReportSpec",
+      "resultType": "Duplo.Extension.IncidentLens.IncidentLensReportResult",
+      "hooksType": "Duplo.Extension.IncidentLens.IncidentLensReportHooks",
+      "serviceType": "Duplo.Extension.IncidentLens.IncidentLensReportService"
+    },
+    {
+      "ticketOriginType": "IncidentLensIncident",
+      "restSegment": "extensions/incidentlens-incidents",
+      "subType": "incidentlens-incident",
+      "archetype": "typed",
+      "registrar": "DevOpsResource",
+      "entityType": "Duplo.Extension.IncidentLens.IncidentLensIncident",
+      "specType": "Duplo.Extension.IncidentLens.IncidentLensIncidentSpec",
+      "resultType": "Duplo.Extension.IncidentLens.IncidentLensIncidentResult",
+      "hooksType": "Duplo.Extension.IncidentLens.IncidentLensIncidentHooks",
+      "serviceType": "Duplo.Extension.IncidentLens.IncidentLensIncidentService"
+    },
+    {
+      "ticketOriginType": "IncidentLensAssignment",
+      "restSegment": "incidentlens-assignments",
+      "subType": "incidentlens-assignment",
+      "archetype": "typed",
+      "registrar": "DevOpsResource",
+      "parent": {
+        "ticketOriginType": "IncidentLensIncident",
+        "routeSegment": "extensions/incidentlens-incidents",
+        "idRouteParam": "parentId"
+      },
+      "entityType": "Duplo.Extension.IncidentLens.IncidentLensAssignment",
+      "specType": "Duplo.Extension.IncidentLens.IncidentLensAssignmentSpec",
+      "resultType": "Duplo.Extension.IncidentLens.IncidentLensAssignmentResult",
+      "hooksType": "Duplo.Extension.IncidentLens.IncidentLensAssignmentHooks",
+      "serviceType": "Duplo.Extension.IncidentLens.IncidentLensAssignmentService"
+    },
+    {
+      "ticketOriginType": "IncidentLensAgency",
+      "restSegment": "extensions/incidentlens-agencies",
+      "subType": "incidentlens-agency",
+      "archetype": "typed",
+      "registrar": "DevOpsResource",
+      "entityType": "Duplo.Extension.IncidentLens.IncidentLensAgency",
+      "specType": "Duplo.Extension.IncidentLens.IncidentLensAgencySpec",
+      "resultType": "Duplo.Extension.IncidentLens.IncidentLensAgencyResult",
+      "hooksType": "Duplo.Extension.IncidentLens.IncidentLensAgencyHooks",
+      "serviceType": "Duplo.Extension.IncidentLens.IncidentLensAgencyService"
+    },
+    {
+      "ticketOriginType": "IncidentLensBrief",
+      "restSegment": "extensions/incidentlens-briefs",
+      "subType": "incidentlens-brief",
+      "archetype": "typed",
+      "registrar": "DevOpsResource",
+      "entityType": "Duplo.Extension.IncidentLens.IncidentLensBrief",
+      "specType": "Duplo.Extension.IncidentLens.IncidentLensBriefSpec",
+      "resultType": "Duplo.Extension.IncidentLens.IncidentLensBriefResult",
+      "hooksType": "Duplo.Extension.IncidentLens.IncidentLensBriefHooks",
+      "serviceType": "Duplo.Extension.IncidentLens.IncidentLensBriefService"
+    }
+  ],
+  "skills": [
+    {
+      "folder": "duplo.incidentlens/0.3.26-rc.2/skills/assess-incident-report",
+      "isBuiltIn": true
+    },
+    {
+      "folder": "duplo.incidentlens/0.3.26-rc.2/skills/build-situation-brief",
+      "isBuiltIn": true
+    }
+  ],
+  "skillMappings": [
+    {
+      "originType": "IncidentLensReport",
+      "subType": "incidentlens-report",
+      "skillNames": [
+        "assess-incident-report"
+      ],
+      "timeout": {
+        "provision": 600,
+        "deprovision": 120
+      }
+    },
+    {
+      "originType": "IncidentLensBrief",
+      "subType": "incidentlens-brief",
+      "skillNames": [
+        "build-situation-brief"
+      ],
+      "timeout": {
+        "provision": 600,
+        "deprovision": 120
+      }
+    }
+  ],
+  "frontend": {
+    "remote": {
+      "remoteName": "duploExtensionIncidentLens",
+      "remoteEntry": "/v1/aiservicedesk/extensions/duplo.incidentlens/fe/remoteEntry.json",
+      "exposedModule": "./Extension",
+      "type": "module"
+    },
+    "menus": [
+      {
+        "id": "duplo.incidentlens-group",
+        "title": "IncidentLens",
+        "type": "collapsible-section",
+        "matIcon": "alert-outline",
+        "order": 30,
+        "children": [
+          {
+            "id": "duplo.incidentlens-report",
+            "title": "Report an incident",
+            "type": "item",
+            "matIcon": "camera",
+            "relativeUrl": "extensions/incidentlens-reports",
+            "order": 1
+          },
+          {
+            "id": "duplo.incidentlens-control",
+            "title": "Control room",
+            "type": "item",
+            "matIcon": "map-marker",
+            "relativeUrl": "extensions/incidentlens-incidents",
+            "order": 2
+          },
+          {
+            "id": "duplo.incidentlens-inbox",
+            "title": "My assignments",
+            "type": "item",
+            "matIcon": "bell-outline",
+            "relativeUrl": "extensions/incidentlens-inbox",
+            "order": 3
+          },
+          {
+            "id": "duplo.incidentlens-agencies",
+            "title": "Agencies",
+            "type": "item",
+            "matIcon": "account-group",
+            "relativeUrl": "extensions/incidentlens-agencies",
+            "order": 4
+          },
+          {
+            "id": "duplo.incidentlens-briefs",
+            "title": "Situation brief",
+            "type": "item",
+            "matIcon": "newspaper-variant-outline",
+            "relativeUrl": "extensions/incidentlens-incidents/briefs"
+          }
+        ]
+      }
+    ],
+    "routes": [
+      {
+        "path": "extensions/incidentlens-reports",
+        "resourceType": "IncidentLensReport",
+        "subType": "incidentlens-report"
+      },
+      {
+        "path": "extensions/incidentlens-incidents",
+        "resourceType": "IncidentLensIncident",
+        "subType": "incidentlens-incident"
+      },
+      {
+        "path": "extensions/incidentlens-inbox",
+        "resourceType": "IncidentLensIncident",
+        "subType": "incidentlens-incident"
+      },
+      {
+        "path": "extensions/incidentlens-agencies",
+        "resourceType": "IncidentLensAgency",
+        "subType": "incidentlens-agency"
+      }
+    ]
+  },
+  "sdkDigest": "44d94a9b58e1d76220297b3a65215c557dd8b4c110110f532868b2d5bb4505c4"
+}

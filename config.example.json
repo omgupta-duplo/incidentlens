@@ -1,0 +1,12 @@
+{
+  "documentationOnly": true,
+  "hostBaseUrl": "https://YOUR_HOST.example.invalid",
+  "workspaceId": "REPLACE_WITH_WORKSPACE_ID",
+  "sdkVersion": "MATCH_RUNNING_HOST",
+  "privateFrontendPackage": "SUPPLY_AUTHORIZED_LOCAL_PACKAGE",
+  "hostResourceToken": "INJECT_AT_RUNTIME_DO_NOT_COMMIT",
+  "googleVisionCredential": "CONFIGURE_IN_HOST_SECRET_SCOPE",
+  "googleMapsBrowserKey": "SUPPLY_RESTRICTED_KEY_AT_BUILD_TIME",
+  "googleMapsServerCredential": "CONFIGURE_IN_HOST_SECRET_SCOPE",
+  "modelRoute": "CONFIGURE_AND_VERIFY_IN_HOST"
+}

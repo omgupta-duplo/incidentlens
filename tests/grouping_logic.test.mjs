@@ -1,0 +1,14 @@
+import assert from 'node:assert/strict';
+import { reportPrefill, proposedPicks, proposedTargets } from '../frontend/src/app/control/report-prefill.ts';
+let n=0; const t=(name,f)=>{f();n++;console.log('ok',name);};
+t('actual assessment preferred',()=>{const p=reportPrefill({spec:{note:'note',categoryHint:'road_collision',latitude:0,longitude:0},result:{assessment:{observations:'observed',suggestedCategory:'waterlogging_flood',suggestedPriority:'P2'}}});assert.equal(p.summary,'observed');assert.equal(p.category,'waterlogging_flood');assert.equal(p.priority,'P2');assert.equal(p.jurisdiction,'0.00000, 0.00000');});
+t('unknowns honest',()=>{const p=reportPrefill(null);assert.equal(p.summary,'');assert.equal(p.jurisdiction,'');assert.match(p.locationSource,/unknown/);assert.match(p.prioritySource,/unknown/);assert.deepEqual(p.services,[]);});
+t('reporter fallback',()=>assert.equal(reportPrefill({spec:{note:'note'}}).summary,'note'));
+t('urgency advisory',()=>{const p=reportPrefill({result:{assessment:{urgencyHint:true}}});assert.equal(p.priority,'P1');assert.match(p.prioritySource,/not dispatch/);});
+t('invalid suggested priority remains unknown default',()=>{const p=reportPrefill({result:{assessment:{suggestedPriority:'invalid'}}});assert.equal(p.priority,'P3');assert.match(p.prioritySource,/unknown/);});
+const c=[{reportId:'a',kind:'same_event',recommendedForGrouping:true},{reportId:'b',kind:'same_event',recommendedForGrouping:false},{reportId:'c',kind:'same_event',incidentId:'i',recommendedForGrouping:true},{reportId:'d',kind:'link_suggestion',incidentId:'i',recommendedForGrouping:true}];
+t('only eligible strong candidates preselected',()=>assert.deepEqual(proposedPicks(c,new Map()),['a']));
+t('explicit exclusions and uncertain inclusion survive refresh',()=>assert.deepEqual(proposedPicks(c,new Map([['a',false],['b',true]])),['b']));
+t('removed candidates do not remain selected',()=>assert.deepEqual(proposedPicks([],new Map([['a',true]])),[]));
+t('existing targets deduplicated',()=>assert.equal(proposedTargets(c).length,1));
+console.log(`${n} grouping logic checks passed`);
